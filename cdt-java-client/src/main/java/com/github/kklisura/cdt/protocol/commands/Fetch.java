@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2019 Kenan Klisura
+ * Copyright (C) 2018 - 2020 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -77,12 +77,9 @@ public interface Fetch {
    *
    * @param requestId An id the client received in requestPaused event.
    * @param responseCode An HTTP response code.
-   * @param responseHeaders Response headers.
    */
   void fulfillRequest(
-      @ParamName("requestId") String requestId,
-      @ParamName("responseCode") Integer responseCode,
-      @ParamName("responseHeaders") List<HeaderEntry> responseHeaders);
+      @ParamName("requestId") String requestId, @ParamName("responseCode") Integer responseCode);
 
   /**
    * Provides response to the request.
@@ -90,14 +87,18 @@ public interface Fetch {
    * @param requestId An id the client received in requestPaused event.
    * @param responseCode An HTTP response code.
    * @param responseHeaders Response headers.
+   * @param binaryResponseHeaders Alternative way of specifying response headers as a \0-separated
+   *     series of name: value pairs. Prefer the above method unless you need to represent some
+   *     non-UTF8 values that can't be transmitted over the protocol as text.
    * @param body A response body.
    * @param responsePhrase A textual representation of responseCode. If absent, a standard phrase
-   *     mathcing responseCode is used.
+   *     matching responseCode is used.
    */
   void fulfillRequest(
       @ParamName("requestId") String requestId,
       @ParamName("responseCode") Integer responseCode,
-      @ParamName("responseHeaders") List<HeaderEntry> responseHeaders,
+      @Optional @ParamName("responseHeaders") List<HeaderEntry> responseHeaders,
+      @Optional @ParamName("binaryResponseHeaders") String binaryResponseHeaders,
       @Optional @ParamName("body") String body,
       @Optional @ParamName("responsePhrase") String responsePhrase);
 

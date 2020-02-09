@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2019 Kenan Klisura
+ * Copyright (C) 2018 - 2020 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,6 +44,7 @@ import com.github.kklisura.cdt.protocol.types.css.RuleUsage;
 import com.github.kklisura.cdt.protocol.types.css.SelectorList;
 import com.github.kklisura.cdt.protocol.types.css.SourceRange;
 import com.github.kklisura.cdt.protocol.types.css.StyleDeclarationEdit;
+import com.github.kklisura.cdt.protocol.types.css.TakeCoverageDelta;
 import com.github.kklisura.cdt.protocol.types.css.Value;
 import java.util.List;
 
@@ -245,9 +246,7 @@ public interface CSS {
    * Obtain list of rules that became used since last call to this method (or since start of
    * coverage instrumentation)
    */
-  @Returns("coverage")
-  @ReturnTypeParameter(RuleUsage.class)
-  List<RuleUsage> takeCoverageDelta();
+  TakeCoverageDelta takeCoverageDelta();
 
   /**
    * Fires whenever a web font is updated. A non-empty font parameter indicates a successfully

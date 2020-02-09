@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2019 Kenan Klisura
+ * Copyright (C) 2018 - 2020 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -251,7 +251,6 @@ public interface DOM {
    * @param x X coordinate.
    * @param y Y coordinate.
    */
-  @Experimental
   NodeForLocation getNodeForLocation(@ParamName("x") Integer x, @ParamName("y") Integer y);
 
   /**
@@ -262,12 +261,14 @@ public interface DOM {
    * @param y Y coordinate.
    * @param includeUserAgentShadowDOM False to skip to the nearest non-UA shadow root ancestor
    *     (default: false).
+   * @param ignorePointerEventsNone Whether to ignore pointer-events: none on elements and hit test
+   *     them.
    */
-  @Experimental
   NodeForLocation getNodeForLocation(
       @ParamName("x") Integer x,
       @ParamName("y") Integer y,
-      @Optional @ParamName("includeUserAgentShadowDOM") Boolean includeUserAgentShadowDOM);
+      @Optional @ParamName("includeUserAgentShadowDOM") Boolean includeUserAgentShadowDOM,
+      @Optional @ParamName("ignorePointerEventsNone") Boolean ignorePointerEventsNone);
 
   /** Returns node's HTML markup. */
   @Returns("outerHTML")

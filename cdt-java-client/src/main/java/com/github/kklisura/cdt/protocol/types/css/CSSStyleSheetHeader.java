@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.types.css;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2019 Kenan Klisura
+ * Copyright (C) 2018 - 2020 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -50,6 +50,10 @@ public class CSSStyleSheetHeader {
   private Double startColumn;
 
   private Double length;
+
+  private Double endLine;
+
+  private Double endColumn;
 
   /** The stylesheet identifier. */
   public String getStyleSheetId() {
@@ -185,5 +189,25 @@ public class CSSStyleSheetHeader {
   /** Size of the content (in characters). */
   public void setLength(Double length) {
     this.length = length;
+  }
+
+  /** Line offset of the end of the stylesheet within the resource (zero based). */
+  public Double getEndLine() {
+    return endLine;
+  }
+
+  /** Line offset of the end of the stylesheet within the resource (zero based). */
+  public void setEndLine(Double endLine) {
+    this.endLine = endLine;
+  }
+
+  /** Column offset of the end of the stylesheet within the resource (zero based). */
+  public Double getEndColumn() {
+    return endColumn;
+  }
+
+  /** Column offset of the end of the stylesheet within the resource (zero based). */
+  public void setEndColumn(Double endColumn) {
+    this.endColumn = endColumn;
   }
 }

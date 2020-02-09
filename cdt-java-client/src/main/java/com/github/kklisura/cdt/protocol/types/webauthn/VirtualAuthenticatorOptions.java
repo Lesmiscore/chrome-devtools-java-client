@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.types.webauthn;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2019 Kenan Klisura
+ * Copyright (C) 2018 - 2020 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,11 +28,13 @@ public class VirtualAuthenticatorOptions {
 
   private AuthenticatorTransport transport;
 
-  private Boolean hasResidentKey;
+  @Optional private Boolean hasResidentKey;
 
-  private Boolean hasUserVerification;
+  @Optional private Boolean hasUserVerification;
 
   @Optional private Boolean automaticPresenceSimulation;
+
+  @Optional private Boolean isUserVerified;
 
   public AuthenticatorProtocol getProtocol() {
     return protocol;
@@ -50,18 +52,22 @@ public class VirtualAuthenticatorOptions {
     this.transport = transport;
   }
 
+  /** Defaults to false. */
   public Boolean getHasResidentKey() {
     return hasResidentKey;
   }
 
+  /** Defaults to false. */
   public void setHasResidentKey(Boolean hasResidentKey) {
     this.hasResidentKey = hasResidentKey;
   }
 
+  /** Defaults to false. */
   public Boolean getHasUserVerification() {
     return hasUserVerification;
   }
 
+  /** Defaults to false. */
   public void setHasUserVerification(Boolean hasUserVerification) {
     this.hasUserVerification = hasUserVerification;
   }
@@ -80,5 +86,15 @@ public class VirtualAuthenticatorOptions {
    */
   public void setAutomaticPresenceSimulation(Boolean automaticPresenceSimulation) {
     this.automaticPresenceSimulation = automaticPresenceSimulation;
+  }
+
+  /** Sets whether User Verification succeeds or fails for an authenticator. Defaults to false. */
+  public Boolean getIsUserVerified() {
+    return isUserVerified;
+  }
+
+  /** Sets whether User Verification succeeds or fails for an authenticator. Defaults to false. */
+  public void setIsUserVerified(Boolean isUserVerified) {
+    this.isUserVerified = isUserVerified;
   }
 }

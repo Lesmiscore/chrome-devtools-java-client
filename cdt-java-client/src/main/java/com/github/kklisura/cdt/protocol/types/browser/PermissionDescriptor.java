@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.types.browser;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2019 Kenan Klisura
+ * Copyright (C) 2018 - 2020 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,6 +37,8 @@ public class PermissionDescriptor {
   @Optional private Boolean userVisibleOnly;
 
   @Optional private String type;
+
+  @Optional private Boolean allowWithoutSanitization;
 
   /**
    * Name of permission. See
@@ -90,5 +92,15 @@ public class PermissionDescriptor {
   /** For "wake-lock" permission, must specify type as either "screen" or "system". */
   public void setType(String type) {
     this.type = type;
+  }
+
+  /** For "clipboard" permission, may specify allowWithoutSanitization. */
+  public Boolean getAllowWithoutSanitization() {
+    return allowWithoutSanitization;
+  }
+
+  /** For "clipboard" permission, may specify allowWithoutSanitization. */
+  public void setAllowWithoutSanitization(Boolean allowWithoutSanitization) {
+    this.allowWithoutSanitization = allowWithoutSanitization;
   }
 }

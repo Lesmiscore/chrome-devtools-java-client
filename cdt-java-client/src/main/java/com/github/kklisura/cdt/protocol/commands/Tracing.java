@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2019 Kenan Klisura
+ * Copyright (C) 2018 - 2020 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -58,6 +58,13 @@ public interface Tracing {
 
   /** Request a global memory dump. */
   RequestMemoryDump requestMemoryDump();
+
+  /**
+   * Request a global memory dump.
+   *
+   * @param deterministic Enables more deterministic results by forcing garbage collection
+   */
+  RequestMemoryDump requestMemoryDump(@Optional @ParamName("deterministic") Boolean deterministic);
 
   /** Start trace events collection. */
   void start();

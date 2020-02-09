@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2019 Kenan Klisura
+ * Copyright (C) 2018 - 2020 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,10 +29,12 @@ import com.github.kklisura.cdt.protocol.support.annotations.Returns;
 import com.github.kklisura.cdt.protocol.support.types.EventHandler;
 import com.github.kklisura.cdt.protocol.support.types.EventListener;
 import com.github.kklisura.cdt.protocol.types.dom.RGBA;
+import com.github.kklisura.cdt.protocol.types.emulation.MediaFeature;
 import com.github.kklisura.cdt.protocol.types.emulation.ScreenOrientation;
 import com.github.kklisura.cdt.protocol.types.emulation.SetEmitTouchEventsForMouseConfiguration;
 import com.github.kklisura.cdt.protocol.types.emulation.VirtualTimePolicy;
 import com.github.kklisura.cdt.protocol.types.page.Viewport;
+import java.util.List;
 
 /** This domain emulates different environments for the page. */
 public interface Emulation {
@@ -159,12 +161,18 @@ public interface Emulation {
       @ParamName("enabled") Boolean enabled,
       @Optional @ParamName("configuration") SetEmitTouchEventsForMouseConfiguration configuration);
 
+  /** Emulates the given media type or media feature for CSS media queries. */
+  void setEmulatedMedia();
+
   /**
-   * Emulates the given media for CSS media queries.
+   * Emulates the given media type or media feature for CSS media queries.
    *
    * @param media Media type to emulate. Empty string disables the override.
+   * @param features Media features to emulate.
    */
-  void setEmulatedMedia(@ParamName("media") String media);
+  void setEmulatedMedia(
+      @Optional @ParamName("media") String media,
+      @Optional @ParamName("features") List<MediaFeature> features);
 
   /**
    * Overrides the Geolocation Position or Error. Omitting any of the parameters emulates position

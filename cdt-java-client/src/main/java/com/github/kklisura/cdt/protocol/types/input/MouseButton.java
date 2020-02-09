@@ -1,10 +1,10 @@
-package com.github.kklisura.cdt.protocol.events.page;
+package com.github.kklisura.cdt.protocol.types.input;
 
 /*-
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2019 Kenan Klisura
+ * Copyright (C) 2018 - 2020 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,20 +22,17 @@ package com.github.kklisura.cdt.protocol.events.page;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** The reason for the navigation. */
-public enum FrameScheduledNavigationReason {
-  @JsonProperty("formSubmissionGet")
-  FORM_SUBMISSION_GET,
-  @JsonProperty("formSubmissionPost")
-  FORM_SUBMISSION_POST,
-  @JsonProperty("httpHeaderRefresh")
-  HTTP_HEADER_REFRESH,
-  @JsonProperty("scriptInitiated")
-  SCRIPT_INITIATED,
-  @JsonProperty("metaTagRefresh")
-  META_TAG_REFRESH,
-  @JsonProperty("pageBlockInterstitial")
-  PAGE_BLOCK_INTERSTITIAL,
-  @JsonProperty("reload")
-  RELOAD
+public enum MouseButton {
+  @JsonProperty("none")
+  NONE,
+  @JsonProperty("left")
+  LEFT,
+  @JsonProperty("middle")
+  MIDDLE,
+  @JsonProperty("right")
+  RIGHT,
+  @JsonProperty("back")
+  BACK,
+  @JsonProperty("forward")
+  FORWARD
 }

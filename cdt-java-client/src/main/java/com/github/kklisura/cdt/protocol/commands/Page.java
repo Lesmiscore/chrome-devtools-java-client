@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2019 Kenan Klisura
+ * Copyright (C) 2018 - 2020 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -59,7 +59,7 @@ import com.github.kklisura.cdt.protocol.types.page.FontFamilies;
 import com.github.kklisura.cdt.protocol.types.page.FontSizes;
 import com.github.kklisura.cdt.protocol.types.page.FrameResourceTree;
 import com.github.kklisura.cdt.protocol.types.page.FrameTree;
-import com.github.kklisura.cdt.protocol.types.page.HandleFileChooserAction;
+import com.github.kklisura.cdt.protocol.types.page.InstallabilityError;
 import com.github.kklisura.cdt.protocol.types.page.LayoutMetrics;
 import com.github.kklisura.cdt.protocol.types.page.Navigate;
 import com.github.kklisura.cdt.protocol.types.page.NavigationHistory;
@@ -179,9 +179,13 @@ public interface Page {
   AppManifest getAppManifest();
 
   @Experimental
-  @Returns("errors")
-  @ReturnTypeParameter(String.class)
-  List<String> getInstallabilityErrors();
+  @Returns("installabilityErrors")
+  @ReturnTypeParameter(InstallabilityError.class)
+  List<InstallabilityError> getInstallabilityErrors();
+
+  @Experimental
+  @Returns("primaryIcon")
+  String getManifestIcons();
 
   /** Returns present frame tree structure. */
   @Returns("frameTree")
@@ -541,32 +545,12 @@ public interface Page {
   /**
    * Intercept file chooser requests and transfer control to protocol clients. When file chooser
    * interception is enabled, native file chooser dialog is not shown. Instead, a protocol event
-   * `Page.fileChooserOpened` is emitted. File chooser can be handled with `page.handleFileChooser`
-   * command.
+   * `Page.fileChooserOpened` is emitted.
    *
    * @param enabled
    */
   @Experimental
   void setInterceptFileChooserDialog(@ParamName("enabled") Boolean enabled);
-
-  /**
-   * Accepts or cancels an intercepted file chooser dialog.
-   *
-   * @param action
-   */
-  @Experimental
-  void handleFileChooser(@ParamName("action") HandleFileChooserAction action);
-
-  /**
-   * Accepts or cancels an intercepted file chooser dialog.
-   *
-   * @param action
-   * @param files Array of absolute file paths to set, only respected with `accept` action.
-   */
-  @Experimental
-  void handleFileChooser(
-      @ParamName("action") HandleFileChooserAction action,
-      @Optional @ParamName("files") List<String> files);
 
   @EventName("domContentEventFired")
   EventListener onDomContentEventFired(EventHandler<DomContentEventFired> eventListener);

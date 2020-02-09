@@ -1,10 +1,10 @@
-package com.github.kklisura.cdt.protocol.types.input;
+package com.github.kklisura.cdt.protocol.types.network;
 
 /*-
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2019 Kenan Klisura
+ * Copyright (C) 2018 - 2020 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,14 +22,15 @@ package com.github.kklisura.cdt.protocol.types.input;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-/** Mouse button. */
-public enum EmulateTouchFromMouseEventButton {
-  @JsonProperty("none")
-  NONE,
-  @JsonProperty("left")
-  LEFT,
-  @JsonProperty("middle")
-  MIDDLE,
-  @JsonProperty("right")
-  RIGHT
+/**
+ * Represents the cookie's 'Priority' status:
+ * https://tools.ietf.org/html/draft-west-cookie-priority-00
+ */
+public enum CookiePriority {
+  @JsonProperty("Low")
+  LOW,
+  @JsonProperty("Medium")
+  MEDIUM,
+  @JsonProperty("High")
+  HIGH
 }

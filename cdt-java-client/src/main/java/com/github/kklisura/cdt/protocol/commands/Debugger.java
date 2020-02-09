@@ -4,7 +4,7 @@ package com.github.kklisura.cdt.protocol.commands;
  * #%L
  * cdt-java-client
  * %%
- * Copyright (C) 2018 - 2019 Kenan Klisura
+ * Copyright (C) 2018 - 2020 Kenan Klisura
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -39,6 +39,7 @@ import com.github.kklisura.cdt.protocol.types.debugger.EvaluateOnCallFrame;
 import com.github.kklisura.cdt.protocol.types.debugger.Location;
 import com.github.kklisura.cdt.protocol.types.debugger.RestartFrame;
 import com.github.kklisura.cdt.protocol.types.debugger.ScriptPosition;
+import com.github.kklisura.cdt.protocol.types.debugger.ScriptSource;
 import com.github.kklisura.cdt.protocol.types.debugger.SearchMatch;
 import com.github.kklisura.cdt.protocol.types.debugger.SetBreakpoint;
 import com.github.kklisura.cdt.protocol.types.debugger.SetBreakpointByUrl;
@@ -164,8 +165,16 @@ public interface Debugger {
    *
    * @param scriptId Id of the script to get source for.
    */
-  @Returns("scriptSource")
-  String getScriptSource(@ParamName("scriptId") String scriptId);
+  ScriptSource getScriptSource(@ParamName("scriptId") String scriptId);
+
+  /**
+   * This command is deprecated. Use getScriptSource instead.
+   *
+   * @param scriptId Id of the Wasm script to get source for.
+   */
+  @Deprecated
+  @Returns("bytecode")
+  String getWasmBytecode(@ParamName("scriptId") String scriptId);
 
   /**
    * Returns stack trace with given `stackTraceId`.
@@ -183,6 +192,7 @@ public interface Debugger {
    * @param parentStackTraceId Debugger will pause when async call with given stack trace is
    *     started.
    */
+  @Deprecated
   @Experimental
   void pauseOnAsyncCall(@ParamName("parentStackTraceId") StackTraceId parentStackTraceId);
 
@@ -202,6 +212,17 @@ public interface Debugger {
 
   /** Resumes JavaScript execution. */
   void resume();
+
+  /**
+   * Resumes JavaScript execution.
+   *
+   * @param terminateOnResume Set to true to terminate execution upon resuming execution. In
+   *     contrast to Runtime.terminateExecution, this will allows to execute further JavaScript
+   *     (i.e. via evaluation) until execution of the paused code is actually resumed, at which
+   *     point termination is triggered. If execution is currently not paused, this parameter has no
+   *     effect.
+   */
+  void resume(@Optional @ParamName("terminateOnResume") Boolean terminateOnResume);
 
   /**
    * Searches for given string in script content.
@@ -418,8 +439,8 @@ public interface Debugger {
   /**
    * Steps into the function call.
    *
-   * @param breakOnAsyncCall Debugger will issue additional Debugger.paused notification if any
-   *     async task is scheduled before next pause.
+   * @param breakOnAsyncCall Debugger will pause on the execution of the first async task which was
+   *     scheduled before next pause.
    */
   void stepInto(@Experimental @Optional @ParamName("breakOnAsyncCall") Boolean breakOnAsyncCall);
 
