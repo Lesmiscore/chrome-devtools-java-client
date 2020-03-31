@@ -28,6 +28,8 @@ public class DownloadWillBegin {
 
   private String frameId;
 
+  private String guid;
+
   private String url;
 
   /** Id of the frame that caused download to begin. */
@@ -38,6 +40,16 @@ public class DownloadWillBegin {
   /** Id of the frame that caused download to begin. */
   public void setFrameId(String frameId) {
     this.frameId = frameId;
+  }
+
+  /** Global unique identifier of the download. */
+  public String getGuid() {
+    return guid;
+  }
+
+  /** Global unique identifier of the download. */
+  public void setGuid(String guid) {
+    this.guid = guid;
   }
 
   /** URL of the resource being downloaded. */

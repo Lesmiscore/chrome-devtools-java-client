@@ -186,8 +186,9 @@ public interface Runtime {
    *     during evaluation. This implies `disableBreaks` below.
    * @param timeout Terminate execution after timing out (number of milliseconds).
    * @param disableBreaks Disable breakpoints during execution.
-   * @param replMode Reserved flag for future REPL mode support. Setting this flag has currently no
-   *     effect.
+   * @param replMode Setting this flag to true enables `let` re-declaration and top-level `await`.
+   *     Note that `let` variables can only be re-declared if they originate from `replMode`
+   *     themselves.
    */
   Evaluate evaluate(
       @ParamName("expression") String expression,

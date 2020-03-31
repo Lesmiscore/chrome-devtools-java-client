@@ -259,14 +259,12 @@ public interface Target {
    * @param flatten Enables "flat" access to the session via specifying sessionId attribute in the
    *     commands. We plan to make this the default, deprecate non-flattened mode, and eventually
    *     retire it. See crbug.com/991325.
-   * @param windowOpen Auto-attach to the targets created via window.open from current target.
    */
   @Experimental
   void setAutoAttach(
       @ParamName("autoAttach") Boolean autoAttach,
       @ParamName("waitForDebuggerOnStart") Boolean waitForDebuggerOnStart,
-      @Optional @ParamName("flatten") Boolean flatten,
-      @Experimental @Optional @ParamName("windowOpen") Boolean windowOpen);
+      @Optional @ParamName("flatten") Boolean flatten);
 
   /**
    * Controls whether to discover available targets and notify via

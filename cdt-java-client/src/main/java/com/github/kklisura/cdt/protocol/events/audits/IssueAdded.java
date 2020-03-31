@@ -20,17 +20,17 @@ package com.github.kklisura.cdt.protocol.events.audits;
  * #L%
  */
 
-import com.github.kklisura.cdt.protocol.types.audits.Issue;
+import com.github.kklisura.cdt.protocol.types.audits.InspectorIssue;
 
 public class IssueAdded {
 
-  private Issue issue;
+  private InspectorIssue issue;
 
-  public Issue getIssue() {
+  public InspectorIssue getIssue() {
     return issue;
   }
 
-  public void setIssue(Issue issue) {
+  public void setIssue(InspectorIssue issue) {
     this.issue = issue;
   }
 }

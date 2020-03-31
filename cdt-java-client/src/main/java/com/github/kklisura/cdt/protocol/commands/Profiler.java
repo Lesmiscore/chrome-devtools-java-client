@@ -76,11 +76,13 @@ public interface Profiler {
    *
    * @param callCount Collect accurate call counts beyond simple 'covered' or 'not covered'.
    * @param detailed Collect block-based coverage.
+   * @param allowTriggeredUpdates Allow the backend to send updates on its own initiative
    */
   @Returns("timestamp")
   Double startPreciseCoverage(
       @Optional @ParamName("callCount") Boolean callCount,
-      @Optional @ParamName("detailed") Boolean detailed);
+      @Optional @ParamName("detailed") Boolean detailed,
+      @Optional @ParamName("allowTriggeredUpdates") Boolean allowTriggeredUpdates);
 
   /** Enable type profile. */
   @Experimental

@@ -32,6 +32,7 @@ import com.github.kklisura.cdt.protocol.types.dom.RGBA;
 import com.github.kklisura.cdt.protocol.types.emulation.MediaFeature;
 import com.github.kklisura.cdt.protocol.types.emulation.ScreenOrientation;
 import com.github.kklisura.cdt.protocol.types.emulation.SetEmitTouchEventsForMouseConfiguration;
+import com.github.kklisura.cdt.protocol.types.emulation.SetEmulatedVisionDeficiencyType;
 import com.github.kklisura.cdt.protocol.types.emulation.VirtualTimePolicy;
 import com.github.kklisura.cdt.protocol.types.page.Viewport;
 import java.util.List;
@@ -175,6 +176,14 @@ public interface Emulation {
       @Optional @ParamName("features") List<MediaFeature> features);
 
   /**
+   * Emulates the given vision deficiency.
+   *
+   * @param type Vision deficiency to emulate.
+   */
+  @Experimental
+  void setEmulatedVisionDeficiency(@ParamName("type") SetEmulatedVisionDeficiencyType type);
+
+  /**
    * Overrides the Geolocation Position or Error. Omitting any of the parameters emulates position
    * unavailable.
    */
@@ -267,6 +276,19 @@ public interface Emulation {
           Integer maxVirtualTimeTaskStarvationCount,
       @Optional @ParamName("waitForNavigation") Boolean waitForNavigation,
       @Optional @ParamName("initialVirtualTime") Double initialVirtualTime);
+
+  /** Overrides default host system locale with the specified one. */
+  @Experimental
+  void setLocaleOverride();
+
+  /**
+   * Overrides default host system locale with the specified one.
+   *
+   * @param locale ICU style C locale (e.g. "en_US"). If not specified or empty, disables the
+   *     override and restores default host system locale.
+   */
+  @Experimental
+  void setLocaleOverride(@Optional @ParamName("locale") String locale);
 
   /**
    * Overrides default host system timezone with the specified one.

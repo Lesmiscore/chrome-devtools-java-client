@@ -22,6 +22,7 @@ package com.github.kklisura.cdt.protocol.commands;
 
 import com.github.kklisura.cdt.protocol.events.page.CompilationCacheProduced;
 import com.github.kklisura.cdt.protocol.events.page.DomContentEventFired;
+import com.github.kklisura.cdt.protocol.events.page.DownloadProgress;
 import com.github.kklisura.cdt.protocol.events.page.DownloadWillBegin;
 import com.github.kklisura.cdt.protocol.events.page.FileChooserOpened;
 import com.github.kklisura.cdt.protocol.events.page.FrameAttached;
@@ -65,6 +66,7 @@ import com.github.kklisura.cdt.protocol.types.page.Navigate;
 import com.github.kklisura.cdt.protocol.types.page.NavigationHistory;
 import com.github.kklisura.cdt.protocol.types.page.PrintToPDF;
 import com.github.kklisura.cdt.protocol.types.page.PrintToPDFTransferMode;
+import com.github.kklisura.cdt.protocol.types.page.ReferrerPolicy;
 import com.github.kklisura.cdt.protocol.types.page.ResourceContent;
 import com.github.kklisura.cdt.protocol.types.page.SetDownloadBehaviorBehavior;
 import com.github.kklisura.cdt.protocol.types.page.SetWebLifecycleStateState;
@@ -246,12 +248,14 @@ public interface Page {
    * @param referrer Referrer URL.
    * @param transitionType Intended transition type.
    * @param frameId Frame id to navigate, if not specified navigates the top frame.
+   * @param referrerPolicy Referrer-policy used for the navigation.
    */
   Navigate navigate(
       @ParamName("url") String url,
       @Optional @ParamName("referrer") String referrer,
       @Optional @ParamName("transitionType") TransitionType transitionType,
-      @Optional @ParamName("frameId") String frameId);
+      @Optional @ParamName("frameId") String frameId,
+      @Experimental @Optional @ParamName("referrerPolicy") ReferrerPolicy referrerPolicy);
 
   /**
    * Navigates current page to the given history entry.
@@ -429,6 +433,7 @@ public interface Page {
    * @param behavior Whether to allow all or deny all download requests, or use default Chrome
    *     behavior if available (otherwise deny).
    */
+  @Deprecated
   @Experimental
   void setDownloadBehavior(@ParamName("behavior") SetDownloadBehaviorBehavior behavior);
 
@@ -440,6 +445,7 @@ public interface Page {
    * @param downloadPath The default path to save downloaded files to. This is requred if behavior
    *     is set to 'allow'
    */
+  @Deprecated
   @Experimental
   void setDownloadBehavior(
       @ParamName("behavior") SetDownloadBehaviorBehavior behavior,
@@ -610,6 +616,11 @@ public interface Page {
   @EventName("downloadWillBegin")
   @Experimental
   EventListener onDownloadWillBegin(EventHandler<DownloadWillBegin> eventListener);
+
+  /** Fired when download makes progress. Last call has |done| == true. */
+  @EventName("downloadProgress")
+  @Experimental
+  EventListener onDownloadProgress(EventHandler<DownloadProgress> eventListener);
 
   /** Fired when interstitial page was hidden */
   @EventName("interstitialHidden")

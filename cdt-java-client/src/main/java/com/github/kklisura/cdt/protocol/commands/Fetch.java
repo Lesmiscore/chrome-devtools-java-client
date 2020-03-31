@@ -116,7 +116,7 @@ public interface Fetch {
    * @param url If set, the request url will be modified in a way that's not observable by page.
    * @param method If set, the request method is overridden.
    * @param postData If set, overrides the post data in the request.
-   * @param headers If set, overrides the request headrts.
+   * @param headers If set, overrides the request headers.
    */
   void continueRequest(
       @ParamName("requestId") String requestId,
